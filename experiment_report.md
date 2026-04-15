@@ -1,8 +1,8 @@
 # Experiment Report: Data Quality Impact on AI Agent
 
-**Student ID:** AI20K-XXXX
-**Name:** (Dien ten cua ban)
-**Date:** (Dien ngay thuc hien)
+**Student ID:** 2A202600424
+**Name:** Tạ Vĩnh Phúc
+**Date:** 15/04/2026
 
 ---
 
@@ -12,8 +12,8 @@ Chay `agent_simulation.py` voi 2 bo du lieu va ghi lai ket qua:
 
 | Scenario | Agent Response | Accuracy (1-10) | Notes |
 |----------|----------------|-----------------|-------|
-| Clean Data (`processed_data.csv`) | (Ghi cau tra loi cua Agent) | | |
-| Garbage Data (`garbage_data.csv`) | (Ghi cau tra loi cua Agent) | | |
+| Clean Data (`processed_data.csv`) | Based on my data, the best choice is Laptop at $1200. | 10 | Agent tư vấn đúng món đồ điện tử hợp lý |
+| Garbage Data (`garbage_data.csv`) | Based on my data, the best choice is Nuclear Reactor at $999999. | 0 | Agent bị lừa bởi dữ liệu tạp nham |
 
 ---
 
@@ -21,15 +21,13 @@ Chay `agent_simulation.py` voi 2 bo du lieu va ghi lai ket qua:
 
 ### Tai sao Agent tra loi sai khi dung Garbage Data?
 
-(Viet nhan xet cua ban o day — it nhat 50 tu)
+Agent lấy thông tin hoàn toàn dựa trên bộ dữ liệu được nạp vào, thiếu suy luận logic độc lập về thế giới thực nếu không được cấp đủ rule ngữ cảnh. Khi bộ dữ liệu bị "đầu độc" bằng các bản ghi chứa giá trị bất thường (outliers như $999999), hoặc những loại hàng hoá viễn tưởng/không tồn tại trên thị trường (Lò phản ứng hạt nhân, Nuclear Reactor), hệ thống Agent sẽ chỉ trích xuất thông tin một cách máy móc và ngây thơ. 
 
-(Hay phan tich cac van de nhu Duplicate IDs, wrong data types, outliers, null values
-va giai thich tai sao chung anh huong den ket qua cua Agent.)
+Nếu không có ETL, các vấn đề như dữ liệu rỗng (null values), giá trị âm/sai kiểu sẽ phá vỡ quy trình RAG của AI. Nó khiến Agent học sai và đưa ra các đề xuất hoàn toàn vô lý làm hỏng trải nghiệm người dùng cuối.
 
 ---
 
 ## 3. Ket luan
 
-**Quality Data > Quality Prompt?** (Dong y hay khong? Giai thich ngan gon.)
-
-(Viet ket luan cua ban o day)
+**Quality Data > Quality Prompt?**
+Hoàn toàn đồng ý. Bất kể prompt có chi tiết hay kỹ thuật RAG phức tạp đến đâu, câu châm ngôn "Garbage In, Garbage Out" luôn đúng đối với AI và ML. Nếu dữ liệu đầu vào chứa toàn thông tin sai lệch, thiếu sót, hoặc không chuẩn hóa, kết quả sinh ra của mô hình cũng sẽ thất bại y hệt. Do đó bước quan trọng nhất trong việc phát triển ứng dụng AI chính là việc xây dựng hệ thống Data Pipeline ETL có tính Observability vững chắc ở tầng nền tảng.
